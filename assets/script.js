@@ -20,6 +20,7 @@ const slides = [
 
 
 /// Étape 2 : Ajouter des Event Listeners sur les flèches
+/// Étape 5 : Mettre en place le défilement infini sur le carrousel
 
 // Flèche de gauche
 const arrowLeft = document.querySelector(".arrow_left");
@@ -35,7 +36,8 @@ arrowLeft.addEventListener("click", () => {
   } else {
   	currentIndex--;
   }
-  updateSlide()
+  updateSlide();
+  updateDots();
 
 });
 
@@ -50,7 +52,8 @@ arrowRight.addEventListener("click", () => {
   } else {
   	currentIndex++;
   }
-  updateSlide()
+  updateSlide();
+  updateDots();
 
 });
 
@@ -60,9 +63,9 @@ arrowRight.addEventListener("click", () => {
 // Ajouter les bullet points sur la partie basse du slider
 function addDots() {
   const listDots = document.querySelector(".dots");
-  const dot = document.createElement("div")
-  dot.classList.add("dot")
-  listDots.appendChild(dot)
+  const itemDot = document.createElement("div")
+  itemDot.classList.add("dot")
+  listDots.appendChild(itemDot)
 }
 
 // Afficher un point par image contenue dans le slider
@@ -97,4 +100,15 @@ let currentIndex = 0;
 function updateSlide() {
 	slideImage.src = `./assets/images/slideshow/${slides[currentIndex].image}`;
 	slideTagLine.innerHTML = slides[currentIndex].tagLine;
+}
+
+
+/// Étape 5 : Mettre en place le défilement infini sur le carrousel
+
+function updateDots() {
+	const dot = document.querySelectorAll('.dot');
+	dot.forEach((dot, i) =>  {
+		// Si dot_selected est présente, elle est supprimée ; sinon ajoutée
+		dot.classList.toggle('dot_selected', i === currentIndex);
+	});
 }
