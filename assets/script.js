@@ -21,16 +21,37 @@ const slides = [
 
 /// Étape 2 : Ajouter des Event Listeners sur les flèches
 
-// Mettre un event listener sur chacune des flèches
+// Flèche de gauche
 const arrowLeft = document.querySelector(".arrow_left");
+
+// Mettre un event listener sur chacune des flèches
 arrowLeft.addEventListener("click", () => {
-	// S'assurer qu’on peut différencier le clic sur le bouton gauche du clic sur le bouton droit
+	// S'assurer qu'on peut différencier le clic sur le bouton gauche du clic sur le bouton droit
   console.log("Vous avez cliqué sur la flèche de gauche")
+
+  // Modifier le slide au clic sur le bouton
+  if (currentIndex === 0) {
+  	currentIndex = totalDots - 1;
+  } else {
+  	currentIndex--;
+  }
+  updateSlide()
+
 });
 
+// Flèche de droite
 const arrowRight = document.querySelector(".arrow_right");
+
 arrowRight.addEventListener("click", () => {
   console.log("Vous avez cliqué sur la flèche de droite")
+
+  if (currentIndex === totalDots - 1) {
+  	currentIndex = 0;
+  } else {
+  	currentIndex++;
+  }
+  updateSlide()
+
 });
 
 
@@ -54,3 +75,26 @@ for(let i = 0; i < totalDots; i++) {
 // Différencier le point qui signale la diapositive en cours de visionnage
 let currentDot = document.querySelector(".dot:first-child");
 currentDot.classList.add("dot_selected");
+
+
+/// Étape 4 : Modifier le slide au clic sur le bouton
+/*
+Au clic sur la flèche droite : 
+on change le bullet point actif au suivant ;
+on change l’image ;
+on change le texte correspondant à l’image.
+Au clic sur la flèche gauche, nous faisons la même chose mais pour les éléments précédents. 
+Pour changer l’image, pensez à bien construire le chemin de la nouvelle image.
+Pour intégrer le texte, utilisez la propriété innerHTML et insérez la tagLine de la slide.
+Travaillez avec les index du tableau. 
+*/
+
+const slideImage = document.querySelector(".banner-img");
+const slideTagLine = document.querySelector("#banner p");
+
+let currentIndex = 0;
+
+function updateSlide() {
+	slideImage.src = `./assets/images/slideshow/${slides[currentIndex].image}`;
+	slideTagLine.innerHTML = slides[currentIndex].tagLine;
+}
