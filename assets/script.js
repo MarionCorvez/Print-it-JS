@@ -34,3 +34,23 @@ arrowRight.addEventListener("click", () => {
 });
 
 
+/// Étape 3 : Ajouter des bullet points au slider
+
+// Ajouter les bullet points sur la partie basse du slider
+function addDots() {
+  const listDots = document.querySelector(".dots");
+  const dot = document.createElement("div")
+  dot.classList.add("dot")
+  listDots.appendChild(dot)
+}
+
+// Afficher un point par image contenue dans le slider
+let totalDots = slides.length;
+
+for(let i = 0; i < totalDots; i++) {
+  addDots();
+}
+
+// Différencier le point qui signale la diapositive en cours de visionnage
+let currentDot = document.querySelector(".dot:first-child");
+currentDot.classList.add("dot_selected");
