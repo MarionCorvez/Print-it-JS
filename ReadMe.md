@@ -7,3 +7,5 @@
 3. [X] Étape 3 : Ajouter des bullet points au slider
 4. [X] Étape 4 : Modifier le slide au clic sur le bouton
 5. [X] Étape 5 : Mettre en place le défilement infini sur le carrousel
+6. [X] Étape 6 : Réorganiser le code
+7. [ ] Étape 7 : Corriger et/ou optimiser le code après les retours de soutenance
