@@ -25,6 +25,10 @@ const slides = [
 const slideImage = document.querySelector(".banner-img");
 const slideTagLine = document.querySelector("#banner p");
 
+// Déclaration des flèches
+const arrowLeft = document.querySelector(".arrow_left");
+const arrowRight = document.querySelector(".arrow_right");
+
 // Création d'un compteur pour les slides
 let currentIndex = 0;
 
@@ -34,27 +38,30 @@ function updateSlide() {
 	slideTagLine.innerHTML = slides[currentIndex].tagLine;
 }
 
-// Déclaration des flèches
-const arrowLeft = document.querySelector(".arrow_left");
-const arrowRight = document.querySelector(".arrow_right");
-
 
 /// Gestion des bullet points
 
 // Récupération du nombre de slides
-let totalDots = slides.length;
+let totalItems = slides.length;
+const listDots = document.querySelector(".dots");
 
 // Ajout des bullet points sur la partie basse du slider
-function addDots() {
-  const listDots = document.querySelector(".dots");
+function addDots(p) {
   const itemDot = document.createElement("div");
   itemDot.classList.add("dot");
   listDots.appendChild(itemDot);
+
+  // Ajout de la navigation sur chaque dot
+  itemDot.addEventListener("click", () => {
+  currentIndex = p;
+	updateSlide();
+	updateDots();
+	})
 }
 
 // Affichage d'un point par image contenue dans le slider
-for (let i = 0; i < totalDots; i++) {
-  addDots();
+for (let i = 0; i < totalItems; i++) {
+  addDots(i);
 }
 
 
@@ -85,7 +92,7 @@ arrowLeft.addEventListener("click", () => {
   // Modification de la slide au clic sur le bouton
   // Si on est à la première slide, on affiche la dernière
   if (currentIndex === 0) {
-  	currentIndex = totalDots - 1;
+  	currentIndex = totalItems - 1;
   } else {
   	// Sinon, on décrémente le compteur de 1
   	currentIndex--;
@@ -100,7 +107,7 @@ arrowRight.addEventListener("click", () => {
   console.log("Vous avez cliqué sur la flèche de droite")
 
   // Si on est à la dernière slide, on affiche la première
-  if (currentIndex === totalDots - 1) {
+  if (currentIndex === totalItems - 1) {
   	currentIndex = 0;
   } else {
   	// Sinon, on incrémente le compteur de 1
